@@ -1,10 +1,11 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { HotModuleReplacementPlugin } = require("webpack");
 
 module.exports = {
   mode: "development",
-  entry: "./index.js",
+  entry: path.join(__dirname, "src", "index.js"),
   output: {
     path: path.resolve(__dirname, "public"),
     filename: "main.js",
@@ -49,6 +50,7 @@ module.exports = {
       filename: "styles.css",
       chunkFilename: "styles.css",
     }),
+    new HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),
   ],
 };
