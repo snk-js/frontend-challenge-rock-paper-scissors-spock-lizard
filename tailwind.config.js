@@ -14,7 +14,7 @@ module.exports = {
         "scissors-from": "#ec9e0e",
         "scissors-to": "#eca922",
         "paper-from": "#4865f4",
-        "paper-to": "##5671f5",
+        "paper-to": "#5671f5",
         "rock-from": "hsl(349, 71%, 52%)",
         "rock-to": "hsl(349, 70%, 56%)",
         "lizard-from": "hsl(261, 73%, 60%)",
