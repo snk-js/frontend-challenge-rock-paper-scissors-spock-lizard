@@ -3,12 +3,19 @@ import Game from "./Game";
 import ScoreHeader from "./ScoreHeader";
 import Background from "./Background";
 import PickedChoice from "./PickedChoice";
+import RulesButton from "./RulesButton";
 
 const Main = () => {
   const [showPickedTitle, setShowPickedTitle] = useState(false);
 
+  const [showRules, setShowRules] = useState(false);
+
   const handleShowPickedTitles = () => {
     setShowPickedTitle(!showPickedTitle);
+  };
+
+  const handleToggleRules = () => {
+    setShowRules(!showRules);
   };
 
   return (
@@ -17,6 +24,7 @@ const Main = () => {
         <ScoreHeader />
         {showPickedTitle ? <PickedChoice /> : <></>}
         <Game handleShowPickedTitles={handleShowPickedTitles} />
+        <RulesButton handle={handleToggleRules} />
       </div>
     </Background>
   );
