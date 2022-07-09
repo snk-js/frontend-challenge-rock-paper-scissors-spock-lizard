@@ -6,7 +6,7 @@ import Background from "./Background";
 const Main = () => {
   return (
     <Background>
-      <div className="container mx-auto h-5/6 flex flex-col items-center justify-around">
+      <div className="container mx-auto my-[3rem] min-h-screen flex flex-col items-center justify-start">
         <ScoreHeader />
         <Game />
       </div>

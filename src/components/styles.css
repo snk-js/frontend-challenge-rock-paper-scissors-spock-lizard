@@ -1,5 +1,5 @@
 .customHover {
-  transition: all 0.8s ease-in-out;
+  transition: all 0.8s ease-out;
 }
 .customHover:hover {
   transform: scale(1.23);
@@ -8,7 +8,8 @@
 }
 
 .customHover[clicked="yes"] {
-  transform: translateX(-100%) translateY(70%) scale(1.2);
-  box-shadow: 1px 1px 600px -10px rgb(245, 237, 245),
-    0 0 5px 3px rgb(255, 255, 255);
+  left: -6rem;
+  top: 50px;
+  transform: scale(2.4);
+  box-shadow: none;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Pentagon from "../assets/bg-pentagon.svg";
 import Scissors from "../assets/icon-scissors.svg";
 import Lizard from "../assets/icon-lizard.svg";
@@ -14,7 +14,6 @@ const Game = () => {
   const [playerChoice, setPlayerChoice] = useState("");
 
   const handlePlayerChoice = (choice) => {
-    console.log(choices[choice], playerChoice);
     if (playerChoice === choices[choice]) {
       setPlayerChoice("");
     } else {
@@ -23,7 +22,7 @@ const Game = () => {
   };
 
   return (
-    <div className="relative mx-10">
+    <div className="relative mx-10 mt-[6rem]">
       <img
         src={Pentagon}
         alt="pentagon holding all choices"
@@ -39,13 +38,14 @@ const Game = () => {
             <Choice
               className={`${
                 playerChoice.length > 0 && playerChoice !== thisChoice
-                  ? "transition-all opacity-0 top-[60rem]"
+                  ? "transition-all ease-in duration-1000 opacity-0 top-[-40rem]"
                   : ""
               }`}
               key={i}
               onClick={() => handlePlayerChoice(i)}
               playerChoice={playerChoice}
-              choice={choices[i]}
+              choice={thisChoice}
+              isHovering={playerChoice === thisChoice}
             />
           );
         }
@@ -55,21 +55,11 @@ const Game = () => {
 };
 
 export const ScissorsButton = (props) => {
-  const [isHovering, setIsHovering] = useState(false);
-
-  useEffect(() => {
-    if (props.playerChoice === props.choice) {
-      setIsHovering(true);
-    } else {
-      setIsHovering(false);
-    }
-  }, [props.playerChoice, props.choice]);
-
   return (
     <div
-      clicked={isHovering ? "yes" : "no"}
+      clicked={props.isHovering ? "yes" : "no"}
       {...props}
-      className={` ${props.className} customHover absolute duration-300 top-[-3rem] shadow-2xl drop-shadow-2xl shadow-slate-900 left-[6rem] rounded-full bg-gradient-to-r from-scissors-from to-scissors-to w-36 h-36`}
+      className={` ${props.className} customHover absolute top-[-3rem] shadow-2xl drop-shadow-2xl shadow-slate-900 left-[6rem] rounded-full bg-gradient-to-r from-scissors-from to-scissors-to w-36 h-36`}
     >
       <div className="rounded-full absolute top-[1rem] shadow-md shadow-slate-900 left-[1rem] bg-[#ebeaeb] w-28 h-28">
         <img
@@ -85,8 +75,9 @@ export const ScissorsButton = (props) => {
 const LizardButton = (props) => {
   return (
     <div
+      clicked={props.isHovering ? "yes" : "no"}
       {...props}
-      className={`${props.className} customHover absolute bottom-[-4rem] left-[-.75rem] shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full bg-gradient-to-r from-lizard-from to-lizard-to w-36 h-36`}
+      className={`${props.className} customHover absolute  top-[14.5rem] left-[-.75rem] shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full bg-gradient-to-r from-lizard-from to-lizard-to w-36 h-36`}
     >
       <div className="rounded-full absolute top-[1rem] shadow-md shadow-slate-900 left-[1rem] bg-[#ebeaeb] w-28 h-28">
         <img
@@ -102,6 +93,7 @@ const LizardButton = (props) => {
 const SpockButton = (props) => {
   return (
     <div
+      clicked={props.isHovering ? "yes" : "no"}
       {...props}
       className={` ${props.className} customHover absolute top-[3rem] left-[-5rem] shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full bg-gradient-to-r from-cyan-from to-cyan-to w-36 h-36`}
     >
@@ -119,8 +111,9 @@ const SpockButton = (props) => {
 const RockButton = (props) => {
   return (
     <div
+      clicked={props.isHovering ? "yes" : "no"}
       {...props}
-      className={`${props.className} customHover absolute right-[-1.5rem] bottom-[-4rem] shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full bg-gradient-to-r from-rock-from to-rock-to w-36 h-36`}
+      className={`${props.className} customHover absolute left-[14rem] top-[14.5rem] shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full bg-gradient-to-r from-rock-from to-rock-to w-36 h-36`}
     >
       <div className="rounded-full absolute top-[1rem] shadow-md shadow-slate-900 left-[1rem] bg-[#ebeaeb] w-28 h-28">
         <img
@@ -136,8 +129,9 @@ const RockButton = (props) => {
 const PaperButton = (props) => {
   return (
     <div
+      clicked={props.isHovering ? "yes" : "no"}
       {...props}
-      className={` ${props.className} customHover absolute right-[-5rem] top-[3rem] shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full bg-gradient-to-r from-paper-from to-paper-to w-36 h-36`}
+      className={` ${props.className} customHover absolute left-[17rem] top-[3rem] shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full bg-gradient-to-r from-paper-from to-paper-to w-36 h-36`}
     >
       <div className="rounded-full absolute top-[1rem] shadow-md shadow-slate-900 left-[1rem] bg-[#ebeaeb] w-28 h-28">
         <img
