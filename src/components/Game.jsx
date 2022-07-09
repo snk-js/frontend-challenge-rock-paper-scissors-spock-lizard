@@ -8,15 +8,17 @@ import Rock from "../assets/icon-rock.svg";
 
 import "./styles.css";
 
-const Game = () => {
+const Game = ({ handleShowPickedTitles }) => {
   const choices = ["scissors", "lizard", "spock", "rock", "paper"];
 
   const [playerChoice, setPlayerChoice] = useState("");
 
   const handlePlayerChoice = (choice) => {
     if (playerChoice === choices[choice]) {
+      handleShowPickedTitles();
       setPlayerChoice("");
     } else {
+      handleShowPickedTitles();
       setPlayerChoice(choices[choice]);
     }
   };
@@ -31,114 +33,95 @@ const Game = () => {
         }`}
       />
 
-      {[ScissorsButton, LizardButton, SpockButton, RockButton, PaperButton].map(
-        (Choice, i) => {
-          const thisChoice = choices[i];
-          return (
-            <Choice
-              className={`${
-                playerChoice.length > 0 && playerChoice !== thisChoice
-                  ? "transition-all ease-in duration-1000 opacity-0 top-[-40rem]"
-                  : ""
-              }`}
-              key={i}
-              onClick={() => handlePlayerChoice(i)}
-              playerChoice={playerChoice}
-              choice={thisChoice}
-              isHovering={playerChoice === thisChoice}
-            />
-          );
-        }
+      {choices.map((thisChoice, i) => {
+        return (
+          <Token
+            adicionalStyle={`${
+              playerChoice.length > 0 && playerChoice !== thisChoice
+                ? "transition-all ease-in duration-1000 opacity-0 top-[-40rem]"
+                : ""
+            }`}
+            key={i}
+            onClick={() => handlePlayerChoice(i)}
+            choice={thisChoice}
+            isHovering={playerChoice === thisChoice}
+          />
+        );
+      })}
+      {playerChoice.length > 0 ? (
+        <Token isEmptyChoice={true} choice="empty" />
+      ) : (
+        <></>
       )}
     </div>
   );
 };
 
-export const ScissorsButton = (props) => {
-  return (
-    <div
-      clicked={props.isHovering ? "yes" : "no"}
-      {...props}
-      className={` ${props.className} customHover absolute top-[-3rem] shadow-2xl drop-shadow-2xl shadow-slate-900 left-[6rem] rounded-full bg-gradient-to-r from-scissors-from to-scissors-to w-36 h-36`}
-    >
-      <div className="rounded-full absolute top-[1rem] shadow-md shadow-slate-900 left-[1rem] bg-[#ebeaeb] w-28 h-28">
-        <img
-          src={Scissors}
-          alt="scissors choice button"
-          className="absolute top-[1.5rem] left-[2rem]"
-        />
-      </div>
-    </div>
-  );
-};
+const Token = (props) => {
+  const { choice, isHovering, isEmptyChoice, adicionalStyle } = props;
 
-const LizardButton = (props) => {
-  return (
-    <div
-      clicked={props.isHovering ? "yes" : "no"}
-      {...props}
-      className={`${props.className} customHover absolute  top-[14.5rem] left-[-.75rem] shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full bg-gradient-to-r from-lizard-from to-lizard-to w-36 h-36`}
-    >
-      <div className="rounded-full absolute top-[1rem] shadow-md shadow-slate-900 left-[1rem] bg-[#ebeaeb] w-28 h-28">
-        <img
-          src={Lizard}
-          alt="lizard choice button"
-          className="absolute top-[1.5rem] left-[1.5rem]"
-        />
-      </div>
-    </div>
-  );
-};
+  const emptyChoice = isEmptyChoice ? "empty-choice" : "token-behavior";
+  const isHoveringChoice = isHovering ? "yes" : "no";
 
-const SpockButton = (props) => {
-  return (
-    <div
-      clicked={props.isHovering ? "yes" : "no"}
-      {...props}
-      className={` ${props.className} customHover absolute top-[3rem] left-[-5rem] shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full bg-gradient-to-r from-cyan-from to-cyan-to w-36 h-36`}
-    >
-      <div className="rounded-full absolute top-[1rem] shadow-md shadow-slate-900 left-[1rem] bg-[#ebeaeb] w-28 h-28">
-        <img
-          src={Spock}
-          alt="spock choice button"
-          className="absolute top-[1.5rem] left-[2.5rem]"
-        />
-      </div>
-    </div>
-  );
-};
+  const outerTokenStyles = {
+    scissors:
+      "bg-gradient-to-r from-scissors-from to-scissors-to  top-[-3rem] left-[6rem]",
+    lizard:
+      "bg-gradient-to-r from-lizard-from to-lizard-to top-[14.5rem] left-[-.75rem]",
+    spock: "bg-gradient-to-r from-cyan-from to-cyan-to top-[3rem] left-[-5rem]",
+    rock: "bg-gradient-to-r from-rock-from to-rock-to left-[14rem] top-[14.5rem]",
+    paper:
+      "bg-gradient-to-r from-paper-from to-paper-to left-[17rem] top-[3rem]",
+    empty: "empty-choice top-[-3rem] left-[6rem]",
+  };
 
-const RockButton = (props) => {
-  return (
-    <div
-      clicked={props.isHovering ? "yes" : "no"}
-      {...props}
-      className={`${props.className} customHover absolute left-[14rem] top-[14.5rem] shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full bg-gradient-to-r from-rock-from to-rock-to w-36 h-36`}
-    >
-      <div className="rounded-full absolute top-[1rem] shadow-md shadow-slate-900 left-[1rem] bg-[#ebeaeb] w-28 h-28">
-        <img
-          src={Rock}
-          alt="rock choice button"
-          className="absolute top-[2rem] left-[2rem]"
-        />
-      </div>
-    </div>
-  );
-};
+  const innerTokenStyles = {
+    scissors: "shadow-md shadow-slate-900 bg-[#ebeaeb]",
+    lizard: "shadow-md shadow-slate-900 bg-[#ebeaeb]",
+    spock: "shadow-md shadow-slate-900 bg-[#ebeaeb]",
+    rock: "shadow-md shadow-slate-900 bg-[#ebeaeb]",
+    paper: "shadow-md shadow-slate-900 bg-[#ebeaeb]",
+    empty: "bg-black opacity-20 absolute top-[-3rem] left-[6rem]",
+  };
 
-const PaperButton = (props) => {
+  const imgStyles = {
+    scissors: {
+      className: "absolute top-[1.5rem] left-[2rem]",
+      alt: "scissors",
+      src: Scissors,
+    },
+    lizard: {
+      className: "absolute top-[1.5rem] left-[1.5rem]",
+      alt: "lizard",
+      src: Lizard,
+    },
+    spock: {
+      className: "absolute top-[1.5rem] left-[2.5rem]",
+      alt: "spock",
+      src: Spock,
+    },
+    rock: {
+      className: "absolute top-[2rem] left-[2rem]",
+      alt: "rock",
+      src: Rock,
+    },
+    paper: {
+      className: "absolute top-[2rem] left-[2rem]",
+      alt: "paper",
+      src: Paper,
+    },
+  };
+
   return (
     <div
-      clicked={props.isHovering ? "yes" : "no"}
+      clicked={isHoveringChoice}
       {...props}
-      className={` ${props.className} customHover absolute left-[17rem] top-[3rem] shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full bg-gradient-to-r from-paper-from to-paper-to w-36 h-36`}
+      className={` ${adicionalStyle} ${emptyChoice} ${outerTokenStyles[choice]} absolute shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full  w-36 h-36`}
     >
-      <div className="rounded-full absolute top-[1rem] shadow-md shadow-slate-900 left-[1rem] bg-[#ebeaeb] w-28 h-28">
-        <img
-          src={Paper}
-          alt="paper choice button"
-          className="absolute top-[2rem] left-[2rem]"
-        />
+      <div
+        className={`${innerTokenStyles[choice]} rounded-full absolute top-[1rem] left-[1rem] w-28 h-28`}
+      >
+        {!isEmptyChoice ? <img alt="token" {...imgStyles[choice]} /> : <></>}
       </div>
     </div>
   );
