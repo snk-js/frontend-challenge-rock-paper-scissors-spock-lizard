@@ -4,11 +4,29 @@ import { useContext } from "react";
 import { GameContext } from "../gameContext";
 
 const Token = (props) => {
-  const { choice, isHovering, isEmptyChoice, adicionalStyle } = props;
+  const {
+    setResult,
+    choice,
+    isHovering,
+    isEmptyChoice,
+    adicionalStyle,
+    winner,
+    playerChoice,
+  } = props;
   const choices = ["scissors", "lizard", "spock", "rock", "paper"];
 
   const [isEmpty, setIsEmpty] = useState(isEmptyChoice);
   const [choiceState, setChoiceState] = useState(choice);
+  const [hasResult, setHasResult] = useState(false);
+
+  useEffect(() => {
+    if (playerChoice.length > 0 && choiceState !== "empty") {
+      setResult({
+        player: playerChoice,
+        computer: choiceState,
+      });
+    }
+  }, [hasResult]);
 
   const { play } = useContext(GameContext);
 
@@ -17,10 +35,14 @@ const Token = (props) => {
 
   useEffect(() => {
     if (isEmptyChoice && play) {
-      console.log("passa por aqui");
       setIsEmpty(true);
-      for (let i = 0; i < choices.length * 5; i++) {
+      for (let i = 0; i < choices.length; i++) {
         setTimeout(() => {
+          if (i === choices.length - 1) {
+            console.log(i, "puts");
+            setHasResult(true);
+          }
+
           setChoiceState(
             choices[Math.floor(Math.random() * choices.length) % choices.length]
           );
@@ -32,8 +54,9 @@ const Token = (props) => {
   return (
     <div
       clicked={isHoveringChoice}
+      winner={winner}
       {...props}
-      className={` ${adicionalStyle} ${emptyChoice} ${outerTokenStyles[choiceState]} absolute shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full  w-36 h-36`}
+      className={` token ${adicionalStyle} ${emptyChoice} ${outerTokenStyles[choiceState]} absolute shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full  w-36 h-36`}
     >
       <div
         className={`${innerTokenStyles[choiceState]} rounded-full absolute top-[1rem] left-[1rem] w-28 h-28`}

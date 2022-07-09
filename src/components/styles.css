@@ -3,8 +3,7 @@
 }
 .token-behavior:hover {
   transform: scale(1.23);
-  box-shadow: 1px 1px 600px -10px rgb(245, 237, 245),
-    0 0 5px 3px rgb(255, 255, 255);
+  box-shadow: var(--winner);
 }
 
 .token-behavior[clicked="yes"] {
@@ -23,4 +22,16 @@
   left: 17rem;
   top: 3rem;
   transform: scale(2.4);
+}
+
+.empty-choice[winner="computer"] {
+  box-shadow: var(--winner);
+}
+
+.token-behavior[winner="player"] {
+  box-shadow: var(--winner);
+}
+
+.token[winner="draw"] {
+  transform: rotate(360deg);
 }

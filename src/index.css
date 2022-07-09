@@ -10,6 +10,9 @@ body {
   background-color: #14173a;
   overflow: hidden;
   font-family: "Varela Round", sans-serif;
+  --winner: 1px 1px 1px 20px rgba(247, 247, 247, 0.048),
+    0 0 1px 40px rgba(236, 236, 236, 0.068),
+    0 0 1px 70px rgba(236, 236, 236, 0.021);
 }
 
 @tailwind base;

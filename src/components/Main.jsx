@@ -31,7 +31,7 @@ const Main = () => {
         {showPickedTitle ? <PickedChoice /> : <></>}
         <Game handleShowPickedTitles={handleShowPickedTitles} />
         <RulesButton handleOpen={handleOpenRules} />
-        <PlayButton />
+        {showPickedTitle ? <PlayButton /> : <></>}
       </div>
     </Background>
   );
