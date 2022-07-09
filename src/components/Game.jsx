@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pentagon from "../assets/bg-pentagon.svg";
-
+import Tokens from "./Tokens";
 import Token from "./Token";
 import "./styles.css";
 
@@ -29,21 +29,11 @@ const Game = ({ handleShowPickedTitles }) => {
         }`}
       />
 
-      {choices.map((thisChoice, i) => {
-        return (
-          <Token
-            adicionalStyle={`${
-              playerChoice.length > 0 && playerChoice !== thisChoice
-                ? "transition-all ease-in duration-1000 opacity-0 top-[-40rem]"
-                : ""
-            }`}
-            key={i}
-            onClick={() => handlePlayerChoice(i)}
-            choice={thisChoice}
-            isHovering={playerChoice === thisChoice}
-          />
-        );
-      })}
+      <Tokens
+        choices={choices}
+        playerChoice={playerChoice}
+        handlePlayerChoice={handlePlayerChoice}
+      />
       {playerChoice.length > 0 ? (
         <Token isEmptyChoice={true} choice="empty" />
       ) : (
