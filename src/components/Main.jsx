@@ -5,7 +5,6 @@ import Background from "./Background";
 import PickedChoice from "./PickedChoice";
 import RulesButton from "./RulesButton";
 import Rules from "./Rules";
-import PlayButton from "./PlayButton";
 
 const Main = () => {
   const [showPickedTitle, setShowPickedTitle] = useState(false);
@@ -31,7 +30,6 @@ const Main = () => {
         {showPickedTitle ? <PickedChoice /> : <></>}
         <Game handleShowPickedTitles={handleShowPickedTitles} />
         <RulesButton handleOpen={handleOpenRules} />
-        {showPickedTitle ? <PlayButton /> : <></>}
       </div>
     </Background>
   );

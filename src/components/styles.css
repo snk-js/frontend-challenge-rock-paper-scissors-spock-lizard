@@ -1,37 +1,46 @@
-.token-behavior {
-  transition: all 0.8s ease-out;
+.player {
+  transition: all 1s ease-out;
 }
-.token-behavior:hover {
+.player:hover {
   transform: scale(1.23);
-  box-shadow: var(--winner);
+  box-shadow: var(--token-hover);
 }
 
-.token-behavior[clicked="yes"] {
+.player[clicked="yes"] {
   left: -6rem;
   top: 50px;
-  transform: scale(2.4) rotate3d(0.2, 0.5, 0.2, 360deg);
+  transform: scale(1.8) rotate3d(0.2, 0.5, 0.2, 360deg);
   box-shadow: none;
 }
 
-.empty-choice {
+.computer {
   transition: all 0.8s ease-out;
 }
 
-.empty-choice {
+.computer {
   position: absolute;
   left: 17rem;
   top: 3rem;
-  transform: scale(2.4);
+  transform: scale(1.8);
 }
 
-.empty-choice[winner="computer"] {
+.computer[winner="computer"] {
   box-shadow: var(--winner);
 }
 
-.token-behavior[winner="player"] {
+.player[winner="player"] {
   box-shadow: var(--winner);
 }
 
-.token[winner="draw"] {
-  transform: rotate(360deg);
+.original-state {
+  box-shadow: none;
+}
+
+@media screen and (min-width: 768px) {
+  .player[clicked="yes"] {
+    left: -12vw;
+  }
+  .computer {
+    left: 25vw;
+  }
 }

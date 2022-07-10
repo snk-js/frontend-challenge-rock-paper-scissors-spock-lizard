@@ -3,6 +3,9 @@ import Pentagon from "../assets/bg-pentagon.svg";
 import Tokens from "./Tokens";
 import Token from "./Token";
 import "./styles.css";
+import { useContext } from "react";
+import { GameContext } from "../gameContext";
+import Result from "./Result";
 
 const ruleLogic = {
   scissors: ["lizard", "paper"],
@@ -12,8 +15,10 @@ const ruleLogic = {
   paper: ["spock", "rock"],
 };
 const Game = ({ handleShowPickedTitles }) => {
+  const { toggleShuffle } = useContext(GameContext);
   const choices = ["scissors", "lizard", "spock", "rock", "paper"];
 
+  const [reset, setReset] = useState(false);
   // computer or player
   const [result, setResult] = useState({
     player: "",
@@ -25,7 +30,12 @@ const Game = ({ handleShowPickedTitles }) => {
   const [playerChoice, setPlayerChoice] = useState("");
 
   useEffect(() => {
-    console.log(result);
+    if (!playerChoice) {
+      setWinner("");
+    }
+  }, [playerChoice]);
+
+  useEffect(() => {
     if (result.player.length > 0 && result.computer.length > 0) {
       if (result.player === result.computer) {
         setWinner("draw");
@@ -35,14 +45,23 @@ const Game = ({ handleShowPickedTitles }) => {
       } else {
         setWinner("computer");
       }
+    } else {
+      setWinner("");
     }
   }, [result, setResult]);
 
   useEffect(() => {
-    console.log("w", winner);
+    if (winner.length > 0) {
+      setTimeout(() => {
+        // toggleShuffle(false);
+      }, 2000);
+    }
   }, [winner]);
 
   const handlePlayerChoice = (choice) => {
+    setTimeout(() => {
+      toggleShuffle(true);
+    }, 1000);
     if (playerChoice === choices[choice]) {
       handleShowPickedTitles();
       setPlayerChoice("");
@@ -53,7 +72,7 @@ const Game = ({ handleShowPickedTitles }) => {
   };
 
   return (
-    <div className="relative mx-10 mt-[6rem]">
+    <div className={`relative mx-10  mt-[6rem] ${playerChoice && "mt-0"}`}>
       <img
         src={Pentagon}
         alt="pentagon holding all choices"
@@ -62,24 +81,30 @@ const Game = ({ handleShowPickedTitles }) => {
         }`}
       />
 
-      <Tokens
-        setResult={setResult}
-        winner={winner}
-        choices={choices}
-        playerChoice={playerChoice}
-        handlePlayerChoice={handlePlayerChoice}
-      />
-      {playerChoice.length > 0 ? (
-        <Token
-          playerChoice={playerChoice}
+      <div className="flex flex-row">
+        <Tokens
+          reset={reset}
           setResult={setResult}
-          isEmptyChoice={true}
-          choice="empty"
           winner={winner}
+          choices={choices}
+          playerChoice={playerChoice}
+          handlePlayerChoice={handlePlayerChoice}
         />
-      ) : (
-        <></>
-      )}
+        {winner.length > 0 ? <Result winner={winner} /> : <></>}
+        {playerChoice.length > 0 ? (
+          <Token
+            reset={reset}
+            playerChoice={playerChoice}
+            setResult={setResult}
+            isEmptyChoice={true}
+            choice="empty"
+            winner={winner}
+            className=""
+          />
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 };

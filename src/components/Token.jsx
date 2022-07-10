@@ -12,6 +12,7 @@ const Token = (props) => {
     adicionalStyle,
     winner,
     playerChoice,
+    reset,
   } = props;
   const choices = ["scissors", "lizard", "spock", "rock", "paper"];
 
@@ -30,7 +31,7 @@ const Token = (props) => {
 
   const { play } = useContext(GameContext);
 
-  const emptyChoice = isEmptyChoice ? "empty-choice" : "token-behavior";
+  const emptyChoice = isEmptyChoice ? "computer" : "player";
   const isHoveringChoice = isHovering ? "yes" : "no";
 
   useEffect(() => {
@@ -56,7 +57,11 @@ const Token = (props) => {
       clicked={isHoveringChoice}
       winner={winner}
       {...props}
-      className={` token ${adicionalStyle} ${emptyChoice} ${outerTokenStyles[choiceState]} absolute shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full  w-36 h-36`}
+      className={` token ${adicionalStyle} ${emptyChoice} ${
+        playerChoice && "md-left32"
+      } ${
+        outerTokenStyles[choiceState]
+      } absolute shadow-2xl drop-shadow-2xl shadow-slate-900 rounded-full  w-36 h-36`}
     >
       <div
         className={`${innerTokenStyles[choiceState]} rounded-full absolute top-[1rem] left-[1rem] w-28 h-28`}
