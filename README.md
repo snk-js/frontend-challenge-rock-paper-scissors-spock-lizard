@@ -1,3 +1,20 @@
+### Result
+
+the app was developed using only react and tailwind in exactly 3 days.
+it has some cool css effects and all the required features for this particular test.
+
+- [x] choose between tokens
+- [x] show result and play again
+- [x] result score persisted
+- [x] has rules panel
+- [x] computer play against you
+- [x] responsive
+
+![React App](https://user-images.githubusercontent.com/34718184/178153944-fbbfa4ea-e783-4b82-be77-871168070b95.gif)
+
+![Uploading React App (1).gif…]()
+
+
 ### Objective
 
 Your challenge is to build out this Rock, Paper, Scissors game and get it looking as close to the design as possible. Use JavaScript and React.
