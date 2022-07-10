@@ -1,7 +1,6 @@
 ### Result
 
-the app was developed using only react and tailwind in exactly 3 days.
-it has some cool css effects and all the required features for this particular test.
+The app is a nerd version of the ROCK-PAPER-SCISSOR Game of choosing one out of three now if it is five, and it was a reference for the series show [The Big Bang Theory](https://www.youtube.com/watch?v=iSHPVCBsnLw) was developed using only react and a tailwind in precisely three days. It has some cool CSS effects and all the required features for this test, except that I did not test it.
 
 - [x] choose between tokens
 - [x] show result and play again
