@@ -38,9 +38,66 @@
 
 @media screen and (min-width: 768px) {
   .player[clicked="yes"] {
-    left: -12vw;
+    left: -17vw;
   }
   .computer {
-    left: 25vw;
+    left: 35vw;
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .player[clicked="yes"]::before {
+    content: "YOU PICKED";
+    color: white;
+    position: absolute;
+    bottom: -3rem;
+    left: 1.3rem;
+  }
+
+  .player[clicked="yes"] {
+    margin-top: 13%;
+  }
+}
+
+@media screen and (min-width: 1020px) {
+  .player[clicked="yes"] {
+    margin-top: 30%;
+  }
+
+  .player[clicked="yes"]::before {
+    content: "YOU PICKED";
+    color: white;
+    position: absolute;
+    top: -2rem;
+    left: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .computer {
+    margin-top: 13%;
+  }
+
+  .computer::before {
+    content: "THE HOUSE PICKED";
+    color: white;
+    position: absolute;
+    bottom: -3rem;
+
+    white-space: nowrap;
+  }
+}
+
+@media screen and (min-width: 1020px) {
+  .computer {
+    margin-top: 30%;
+  }
+
+  .computer::before {
+    content: "THE HOUSE PICKED";
+    color: white;
+    position: absolute;
+    top: -2rem;
+    left: -1rem;
   }
 }

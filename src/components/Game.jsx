@@ -14,7 +14,7 @@ const ruleLogic = {
   rock: ["scissors", "lizard"],
   paper: ["spock", "rock"],
 };
-const Game = ({ handleShowPickedTitles }) => {
+const Game = ({ handleShowPickedTitles, handleSetScore }) => {
   const { toggleShuffle } = useContext(GameContext);
   const choices = ["scissors", "lizard", "spock", "rock", "paper"];
 
@@ -39,7 +39,9 @@ const Game = ({ handleShowPickedTitles }) => {
     if (result.player.length > 0 && result.computer.length > 0) {
       if (result.player === result.computer) {
         setWinner("draw");
+        return;
       }
+
       if (ruleLogic[result.player].includes(result.computer)) {
         setWinner("player");
       } else {
@@ -51,11 +53,7 @@ const Game = ({ handleShowPickedTitles }) => {
   }, [result, setResult]);
 
   useEffect(() => {
-    if (winner.length > 0) {
-      setTimeout(() => {
-        // toggleShuffle(false);
-      }, 2000);
-    }
+    if (winner === "player") handleSetScore();
   }, [winner]);
 
   const handlePlayerChoice = (choice) => {
