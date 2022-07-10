@@ -1,4 +1,4 @@
-const Result = ({ winner }) => {
+const Result = ({ winner, playAgain }) => {
   return (
     <div
       className={`${
@@ -12,7 +12,10 @@ const Result = ({ winner }) => {
           ? "DRAW"
           : "YOU LOSE"}
       </span>
-      <button className="text-bold text-blue-900 lg:text-xs text-2xl justify-center items-center bg-white rounded-md py-2">
+      <button
+        onClick={playAgain}
+        className="text-bold text-blue-900 lg:text-xs text-2xl justify-center items-center bg-white rounded-md py-2"
+      >
         PLAY AGAIN
       </button>
     </div>

@@ -14,7 +14,13 @@ const ruleLogic = {
   rock: ["scissors", "lizard"],
   paper: ["spock", "rock"],
 };
-const Game = ({ handleShowPickedTitles, handleSetScore }) => {
+const Game = ({
+  handleShowPickedTitles,
+  handleSetScore,
+  playerChoice,
+  setPlayerChoice,
+  playAgain,
+}) => {
   const { toggleShuffle } = useContext(GameContext);
   const choices = ["scissors", "lizard", "spock", "rock", "paper"];
 
@@ -26,8 +32,6 @@ const Game = ({ handleShowPickedTitles, handleSetScore }) => {
   });
 
   const [winner, setWinner] = useState("");
-
-  const [playerChoice, setPlayerChoice] = useState("");
 
   useEffect(() => {
     if (!playerChoice) {
@@ -61,8 +65,7 @@ const Game = ({ handleShowPickedTitles, handleSetScore }) => {
       toggleShuffle(true);
     }, 1000);
     if (playerChoice === choices[choice]) {
-      handleShowPickedTitles();
-      setPlayerChoice("");
+      playAgain();
     } else {
       handleShowPickedTitles();
       setPlayerChoice(choices[choice]);
@@ -88,7 +91,11 @@ const Game = ({ handleShowPickedTitles, handleSetScore }) => {
           playerChoice={playerChoice}
           handlePlayerChoice={handlePlayerChoice}
         />
-        {winner.length > 0 ? <Result winner={winner} /> : <></>}
+        {winner.length > 0 ? (
+          <Result winner={winner} playAgain={playAgain} />
+        ) : (
+          <></>
+        )}
         {playerChoice.length > 0 ? (
           <Token
             reset={reset}

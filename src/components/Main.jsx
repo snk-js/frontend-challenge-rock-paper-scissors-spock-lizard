@@ -11,6 +11,7 @@ const Main = () => {
 
   const [score, setScore] = useLocalStorage("score", 0);
   const [showRules, setShowRules] = useState(false);
+  const [playerChoice, setPlayerChoice] = useState("");
 
   const handleSetScore = () => {
     setScore(score + 1);
@@ -18,6 +19,11 @@ const Main = () => {
 
   const handleShowPickedTitles = () => {
     setShowPickedTitle(!showPickedTitle);
+  };
+
+  const playAgain = () => {
+    handleShowPickedTitles();
+    setPlayerChoice("");
   };
 
   const handleCloseRules = () => {
@@ -33,8 +39,11 @@ const Main = () => {
         {showRules ? <Rules handleClose={handleCloseRules} /> : <></>}
         <ScoreHeader score={score} />
         <Game
+          setPlayerChoice={setPlayerChoice}
+          playerChoice={playerChoice}
           handleSetScore={handleSetScore}
           handleShowPickedTitles={handleShowPickedTitles}
+          playAgain={playAgain}
         />
         <RulesButton handleOpen={handleOpenRules} />
       </div>
