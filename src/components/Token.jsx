@@ -77,14 +77,10 @@ const Token = (props) => {
 };
 
 const TokenImage = ({ isEmptyChoice, choiceState, play }) => {
-  if (!isEmptyChoice) {
+  if (!isEmptyChoice || play) {
     return <img alt="token" {...imgStyles[choiceState]} />;
   } else {
-    if (play) {
-      return <img alt="token" {...imgStyles[choiceState]} />;
-    } else {
       return <></>;
-    }
   }
 };
 
